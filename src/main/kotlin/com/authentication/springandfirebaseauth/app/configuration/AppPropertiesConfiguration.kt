@@ -1,0 +1,9 @@
+package com.authentication.springandfirebaseauth.app.configuration
+
+import com.authentication.springandfirebaseauth.app.AppProperties
+import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+@EnableConfigurationProperties(AppProperties::class)
+class AppPropertiesConfiguration
