@@ -2,13 +2,12 @@ package com.authentication.springandfirebaseauth.user.repository
 
 import com.authentication.springandfirebaseauth.user.model.User
 import com.authentication.springandfirebaseauth.user.model.UserRequest
-import com.google.api.client.http.HttpResponseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserRecord
 import com.google.firebase.auth.UserRecord.CreateRequest
 import com.google.firebase.auth.UserRecord.UpdateRequest
 
-class FirebaseUserRepository(private val firebaseAuth: FirebaseAuth): UserRepository {
+class FirebaseUserRepository(private val firebaseAuth: FirebaseAuth) : UserRepository {
 
     override fun saveNewUser(user: UserRequest): User {
         val createReq: CreateRequest = CreateRequest()
@@ -18,13 +17,9 @@ class FirebaseUserRepository(private val firebaseAuth: FirebaseAuth): UserReposi
                 .setDisabled(false)
                 .setEmailVerified(false)
 
-        try {
-            val savedUser: UserRecord = firebaseAuth.createUser(createReq)
+        val savedUser: UserRecord = firebaseAuth.createUser(createReq)
 
-            return buildUserModel(savedUser)
-        } catch (e: HttpResponseException) {
-            throw Exception(e)
-        }
+        return buildUserModel(savedUser)
     }
 
     override fun getUserByUid(id: String): User {
