@@ -11,7 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 @RequestMapping("/users")
 class UserController(private val service: UserService) {
 
-    @PostMapping
+    @PostMapping("/singup")
     fun saveNewUser(@RequestBody user: UserRequest): ResponseEntity<User> {
         val savedUser = service.saveNewUser(user)
 
